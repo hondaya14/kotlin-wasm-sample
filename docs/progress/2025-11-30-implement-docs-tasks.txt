@@ -1,0 +1,12 @@
+Task: Implement docs/tasks.md
+
+Context:
+- Align task plan with docs/SPEC.md and project guidelines.
+
+Work Done:
+- Verified and finalized docs/tasks.md with clear milestones (M1–M4), acceptance criteria, file map, and build/run commands.
+- Ensured consistency with SPEC: metrics, sampling intervals, feature-flag wiring, export/import schema, and UI interactions.
+
+Next Steps:
+- Follow tasks.md to implement/iterate remaining milestones as needed.
+- Update README with enablement and browser support if anything changes during implementation.
