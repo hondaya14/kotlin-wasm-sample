@@ -53,3 +53,28 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 
 We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
 If you face any issues, please report them on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
+
+### Memory Performance Visualizer (Web)
+
+An opt‑in developer tool to observe memory and event‑loop behavior at runtime. It samples and renders:
+- Wasm memory size, JS heap (Chromium), FPS estimate, and Long Tasks.
+
+Enable via either Gradle property or env var when running dev servers:
+- Wasm: `./gradlew :composeApp:wasmJsBrowserDevelopmentRun -Pvisualizer=true` or `VISUALIZER=1 ./gradlew :composeApp:wasmJsBrowserDevelopmentRun`
+- JS: `./gradlew :composeApp:jsBrowserDevelopmentRun -Pvisualizer=true` or `VISUALIZER=1 ./gradlew :composeApp:jsBrowserDevelopmentRun`
+
+What you get:
+- Overlay panel (top‑right) with Memory and Event Loop charts.
+- Controls: export/import JSON, save/restore to localStorage, clear, time‑window (zoom), pan offset, JS series toggle, add mark.
+- Alerts: simple upward trend and spike detection on memory.
+
+Browser support notes:
+- JS heap via `performance.memory` is Chromium‑only; guarded when unavailable.
+- Long Task API may be missing (e.g., Safari); a RAF‑delta fallback is used.
+
+Manual validation:
+- Open the app with the flag enabled; observe charts updating.
+- In DevTools console, run a blocking snippet to see long tasks increase:
+  `const t=Date.now(); while(Date.now()-t<200){}`
+- Click Export to download a JSON session; Import to restore it.
+- Optionally Save Local to persist the session and Restore Local to reload it later.

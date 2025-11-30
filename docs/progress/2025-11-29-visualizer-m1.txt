@@ -1,0 +1,16 @@
+Context:
+- Implement Milestone 1 from docs/SPEC.md: minimal collector + inline charts (Wasm memory + RAF FPS), behind a feature flag.
+
+Decisions:
+- Added expect/actual VisualizerConfig with a build-time __VISUALIZER__ flag injected via webpack DefinePlugin.
+- Minimal RingBuffer in commonMain to store (time,value) pairs efficiently with snapshots for Compose.
+- Web collectors read wasmMemory.buffer.byteLength if available (Kotlin/Wasm export) and estimate FPS via requestAnimationFrame deltas.
+- Simple LineChart composable using Canvas (commonMain) for basic visualization; values labeled in panel header.
+- VisualizerPanel overlays in web entrypoint only when enabled.
+- Added unit tests for RingBuffer behavior.
+
+Next Steps:
+- Milestone 2: Long Task API observer + JSON export/import.
+- Add controls (start/stop, interval), simple layout polish, and error guards.
+- Consider adding JS heap metric when available.
+

@@ -1,0 +1,16 @@
+Context:
+- Implemented M2–M4 from docs/SPEC.md: Long Task detection, JSON export/import, annotations, trend alerts, and JS heap sampling with unified memory panel.
+
+Changes:
+- Added common data model: Metrics.kt, SessionModel.kt, JsonCodec.kt, TrendDetector.kt.
+- Web collectors extended: observe PerformanceObserver('longtask') with RAF fallback, sample JS heap via performance.memory, export/import helpers.
+- UI controls: export/import/clear, window control (zoom), JS toggle, add mark.
+- Trend alerts: upward trend and spike detection based on recent window.
+- Tests: JsonCodec round‑trip, TrendDetector behavior.
+
+Validation:
+- Manual: run with VISUALIZER=1; memory and FPS charts update; long tasks count increases when blocking loop is run; export produces JSON; import repopulates series; JS heap appears on Chromium.
+
+Next Steps:
+- Optional: richer chart interactions (pan/hover), localStorage session restore.
+

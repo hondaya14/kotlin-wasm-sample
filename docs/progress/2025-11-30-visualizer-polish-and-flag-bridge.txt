@@ -1,0 +1,18 @@
+Context:
+- Finalize SPEC features: hover/pan interactions, optional localStorage restore, and Gradle -Pvisualizer flag bridging to Webpack DefinePlugin.
+
+Changes:
+- Chart hover: LineChart now shows a vertical guide and point marker with hovered value and displays it in the header.
+- Pan/zoom: Added window size (s) and pan offset (s) controls; all series slice by window and offset.
+- Local storage: Added Save Local / Restore Local / Clear Local using localStorage under key `visualizer_session`.
+- Gradle bridge: `composeApp/build.gradle.kts` propagates `-Pvisualizer=true` to env `VISUALIZER` for Node/webpack tasks so `__VISUALIZER__` is defined.
+- README: Documented both `-Pvisualizer=true` and `VISUALIZER=1` enablement and updated feature list.
+
+Validation:
+- Unit tests unchanged (ring buffer, JSON, trends) still relevant.
+- Manual (expected): with flag enabled, charts update; hover shows values; pan offset moves window; Save/Restore Local works; long tasks and JS heap behave per browser support.
+
+Notes / Risks:
+- Wasm memory sampling relies on a globally exposed `wasmMemory` if available; guarded when absent.
+- Gradle task type coverage uses NodeJsExec/KotlinWebpack; environments may vary across plugin versions.
+
