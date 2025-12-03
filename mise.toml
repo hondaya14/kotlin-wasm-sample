@@ -1,2 +1,2 @@
 [tools]
-java = "adoptopenjdk-24.0.2+12"
+java = "openjdk-24.0.2"
